@@ -1,0 +1,43 @@
+---
+import { unsplash, unsplashSet } from '../lib/images';
+
+interface Props {
+  title: string;
+  description?: string;
+  image: string;
+  imageAlt: string;
+  priority?: boolean;
+}
+
+const { title, description, image, imageAlt, priority = true } = Astro.props;
+---
+
+<section class="relative isolate flex min-h-[260px] items-center overflow-hidden bg-ink py-14 sm:min-h-[330px] sm:py-20 lg:min-h-[400px]">
+  <img
+    src={unsplash(image, 1600, 700, 60)}
+    srcset={unsplashSet(image, [768, 1200, 1600, 1920], 16 / 7, 60)}
+    sizes="100vw"
+    alt={imageAlt}
+    width="1920"
+    height="700"
+    class="absolute inset-0 -z-10 h-full w-full object-cover"
+    loading={priority ? 'eager' : 'lazy'}
+    fetchpriority={priority ? 'high' : 'auto'}
+    decoding="async"
+  />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink/90 via-ink/65 to-ink/25"></div>
+
+  <div class="wrap">
+    <nav aria-label="Breadcrumb" class="mb-4 text-[11px] tracking-[0.14em] text-white/75 uppercase sm:text-xs">
+      <ol class="flex flex-wrap items-center gap-2">
+        <li><a href="/" class="transition-colors hover:text-white">Home</a></li>
+        <li aria-hidden="true">/</li>
+        <li aria-current="page" class="text-white">{title}</li>
+      </ol>
+    </nav>
+    <h1 class="font-display text-3xl tracking-[0.04em] text-white uppercase sm:text-4xl lg:text-5xl">
+      {title}
+    </h1>
+    {description && <p class="mt-4 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">{description}</p>}
+  </div>
+</section>

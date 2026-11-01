@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #b80c26;
+  --color-brand-dark: #93091e;
+  --color-ink: #161616;
+  --color-muted: #666666;
+  --color-line: #c4c4c4;
+  --color-mist: #e5e5e5;
+
+  --font-sans: "Lato", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Julius Sans One", "Lato", ui-sans-serif, system-ui, sans-serif;
+
+  --breakpoint-xs: 30rem;
+
+  --shadow-card: 0 4px 10px rgb(0 0 0 / 0.03);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 1.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-[90%] max-w-[1400px];
+  }
+
+  .eyebrow {
+    @apply font-display text-[22px] leading-none tracking-[0.06em] text-brand uppercase sm:text-2xl;
+  }
+
+  .rule-brand {
+    @apply mt-4 h-px w-[42%] border-0 bg-line;
+  }
+
+  .body-copy {
+    @apply text-[17px] leading-[1.7] font-normal text-muted sm:text-lg;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center border border-brand bg-brand px-6 py-3.5 text-center text-[13px] tracking-[0.08em] text-white uppercase transition-colors duration-200 hover:bg-white hover:text-brand sm:text-[15px];
+  }
+
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center border border-white bg-white/0 px-6 py-3.5 text-center text-[13px] tracking-[0.08em] text-white uppercase transition-colors duration-200 hover:bg-white hover:text-brand sm:text-[15px];
+  }
+
+  .link-underline {
+    @apply relative inline-block pb-1 font-bold text-ink after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-8 after:bg-brand after:transition-[width] after:duration-300 hover:after:w-full;
+  }
+
+  .field {
+    @apply w-full border border-line bg-white px-4 py-3 text-base text-ink transition-colors placeholder:text-muted/70 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none;
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-bold tracking-wide text-ink uppercase;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-brand focus:px-5 focus:py-3 focus:text-sm focus:font-bold focus:text-white;
+  }
+}

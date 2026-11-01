@@ -1,0 +1,253 @@
+---
+import Logo from './Logo.astro';
+import { nav, site } from '../data/site';
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href.includes('#')) return false;
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
+---
+
+<header class="relative z-50 bg-white">
+  <div class="wrap flex items-center justify-between gap-4 py-4 lg:py-5">
+    <Logo />
+
+    <div class="hidden items-center gap-5 md:flex">
+      <a
+        href={site.social.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Bunu Tech on LinkedIn"
+        class="text-ink transition-colors hover:text-brand"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"
+          ></path>
+        </svg>
+      </a>
+      <a
+        href={site.social.instagram}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Bunu Tech on Instagram"
+        class="text-ink transition-colors hover:text-brand"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+
+    <button
+      type="button"
+      id="menu-toggle"
+      class="inline-flex items-center justify-center p-2 text-ink md:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Open main menu"
+      data-menu-toggle
+    >
+      <svg data-menu-icon="open" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" d="M3 6h18M3 12h18M3 18h18"></path>
+      </svg>
+      <svg data-menu-icon="close" class="hidden" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" d="M5 5l14 14M19 5L5 19"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Desktop navigation -->
+  <nav class="hidden bg-brand text-white md:block" aria-label="Primary">
+    <div class="wrap flex items-stretch justify-between gap-6">
+      <p class="hidden items-center gap-2 py-4 text-[10px] tracking-[0.08em] text-white/85 uppercase xl:flex">
+        <span class="font-bold">Certified In:</span>
+        <span>{site.certifications.join(' | ')}</span>
+      </p>
+
+      <ul class="ml-auto flex items-stretch text-[12px] tracking-[0.08em] uppercase lg:text-[13px]">
+        {
+          nav.map((item) => (
+            <li class:list={['relative flex items-stretch', item.children && 'group']} data-nav-group>
+              <a
+                href={item.href}
+                class:list={[
+                  'flex items-center gap-1 px-3 py-[18px] transition-colors hover:bg-white/10 xl:px-4',
+                  isActive(item.href) && 'bg-white/10 font-bold',
+                ]}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+              {item.children && (
+                <>
+                  <button
+                    type="button"
+                    class="flex items-center px-1.5 text-white/90 transition-colors hover:text-white"
+                    aria-expanded="false"
+                    aria-controls={`${item.label.replace(/\s+/g, '-').toLowerCase()}-submenu`}
+                    aria-label={`Toggle ${item.label} submenu`}
+                    data-dropdown-toggle
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+                    </svg>
+                  </button>
+                  <div
+                    id={`${item.label.replace(/\s+/g, '-').toLowerCase()}-submenu`}
+                    class="invisible absolute top-full left-0 z-50 w-72 translate-y-1 bg-white opacity-0 shadow-xl transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-data-[open=true]:visible group-data-[open=true]:translate-y-0 group-data-[open=true]:opacity-100"
+                  >
+                    {item.children.map((child) => (
+                      <a
+                        href={child.href}
+                        class="block border-b border-line/70 px-6 py-3.5 text-[14px] font-bold text-ink normal-case transition-colors last:border-0 hover:bg-black/10"
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                </>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Mobile navigation -->
+  <div id="mobile-menu" class="hidden border-t border-white/20 bg-brand text-white md:hidden" data-mobile-menu>
+    <nav class="wrap py-2" aria-label="Mobile">
+      <ul class="text-sm tracking-[0.06em] uppercase">
+        {
+          nav.map((item) => (
+            <li class="border-b border-white/25 last:border-0">
+              {item.children ? (
+                <>
+                  <div class="flex items-center justify-between">
+                    <a
+                      href={item.href}
+                      class="flex-1 py-4"
+                      aria-current={isActive(item.href) ? 'page' : undefined}
+                    >
+                      {item.label}
+                    </a>
+                    <button
+                      type="button"
+                      class="p-4"
+                      aria-expanded="false"
+                      aria-controls={`m-${item.label.replace(/\s+/g, '-').toLowerCase()}`}
+                      aria-label={`Toggle ${item.label} submenu`}
+                      data-accordion
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" data-chevron>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+                      </svg>
+                    </button>
+                  </div>
+                  <ul
+                    id={`m-${item.label.replace(/\s+/g, '-').toLowerCase()}`}
+                    class="hidden pb-3 pl-4 text-[13px] normal-case"
+                    data-accordion-panel
+                  >
+                    {item.children.map((child) => (
+                      <li>
+                        <a href={child.href} class="block py-2.5 text-white/90 hover:text-white">
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a
+                  href={item.href}
+                  class="block py-4"
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const menuToggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const mobileMenu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+  const menuIconOpen = document.querySelector<SVGElement>('[data-menu-icon="open"]');
+  const menuIconClose = document.querySelector<SVGElement>('[data-menu-icon="close"]');
+
+  function setMenu(open: boolean) {
+    if (!menuToggle || !mobileMenu) return;
+    mobileMenu.classList.toggle('hidden', !open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Close main menu' : 'Open main menu');
+    menuIconOpen?.classList.toggle('hidden', open);
+    menuIconClose?.classList.toggle('hidden', !open);
+  }
+
+  menuToggle?.addEventListener('click', () => {
+    setMenu(menuToggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Mobile accordions
+  document.querySelectorAll<HTMLButtonElement>('[data-accordion]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panel = document.getElementById(button.getAttribute('aria-controls') ?? '');
+      const open = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!open));
+      panel?.classList.toggle('hidden', open);
+      button.querySelector('[data-chevron]')?.classList.toggle('rotate-180', !open);
+    });
+  });
+
+  // Desktop dropdowns (click / keyboard support on top of CSS hover)
+  const dropdownToggles = document.querySelectorAll<HTMLButtonElement>('[data-dropdown-toggle]');
+
+  function closeDropdowns(except?: HTMLElement) {
+    document.querySelectorAll<HTMLElement>('[data-nav-group]').forEach((group) => {
+      if (group === except) return;
+      group.removeAttribute('data-open');
+      group.querySelector<HTMLButtonElement>('[data-dropdown-toggle]')?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  dropdownToggles.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      const group = button.closest<HTMLElement>('[data-nav-group]');
+      if (!group) return;
+      const open = group.getAttribute('data-open') === 'true';
+      closeDropdowns(group);
+      group.dataset.open = String(!open);
+      button.setAttribute('aria-expanded', String(!open));
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target as HTMLElement).closest('[data-nav-group]')) closeDropdowns();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeDropdowns();
+      setMenu(false);
+      menuToggle?.focus();
+    }
+  });
+
+  // Reset mobile state when resizing up to desktop
+  const desktop = window.matchMedia('(min-width: 768px)');
+  desktop.addEventListener('change', (event) => {
+    if (event.matches) setMenu(false);
+  });
+</script>

@@ -1,0 +1,360 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site, services } from '../data/site';
+import { unsplash } from '../lib/images';
+
+const ogImage = unsplash('1497366216548-37526070297c', 1200, 630, 65);
+const mapSrc =
+  'https://www.openstreetmap.org/export/embed.html?bbox=3.3850%2C6.4480%2C3.4050%2C6.4620&layer=mapnik&marker=6.4550%2C3.3950';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ContactPage',
+      '@id': `${site.url}/contact#webpage`,
+      url: `${site.url}/contact`,
+      name: 'Contact Bunu Tech',
+      description: 'Contact Bunu Tech for construction, facility management and curtain walling enquiries.',
+      isPartOf: { '@id': `${site.url}/#website` },
+      about: { '@id': `${site.url}/#organization` },
+      inLanguage: 'en-NG',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+        { '@type': 'ListItem', position: 2, name: 'Contact Us', item: `${site.url}/contact` },
+      ],
+    },
+    {
+      '@type': 'GeneralContractor',
+      '@id': `${site.url}/#organization`,
+      name: site.legalName,
+      url: site.url,
+      telephone: site.phone,
+      email: site.email,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: site.address.street,
+        addressLocality: site.address.locality,
+        addressRegion: site.address.region,
+        postalCode: site.address.postalCode,
+        addressCountry: 'NG',
+      },
+      openingHours: 'Mo-Fr 08:00-17:00',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: site.phone,
+        email: site.email,
+        contactType: 'sales',
+        areaServed: 'NG',
+        availableLanguage: ['English'],
+      },
+    },
+  ],
+};
+
+const details = [
+  {
+    label: 'Head office',
+    lines: [site.address.street, site.address.locality, `${site.address.region} – ${site.address.country}`],
+    href: '',
+    icon: 'pin',
+  },
+  {
+    label: 'Telephone',
+    lines: [site.phone],
+    href: `tel:${site.phoneHref}`,
+    icon: 'phone',
+  },
+  {
+    label: 'Email',
+    lines: [site.email],
+    href: `mailto:${site.email}`,
+    icon: 'mail',
+  },
+  {
+    label: 'Opening hours',
+    lines: [site.hours],
+    href: '',
+    icon: 'clock',
+  },
+];
+
+const icons: Record<string, string[]> = {
+  pin: ['M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z', 'M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z'],
+  phone: [
+    'M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z',
+  ],
+  mail: ['M4 4h16v16H4z', 'm4 6 8 6 8-6'],
+  clock: ['M3 12a9 9 0 1 0 9-9 9 9 0 0 0-9 9Z', 'M12 7v5l3 2'],
+};
+---
+
+<Layout
+  title="Contact Us | Bunu Tech — Let’s Build Together"
+  description="Contact Bunu Tech in Lagos for construction, facility management and aluminium and curtain walling enquiries. Call +234 (0)902 322 0000 or send us a message."
+  image={ogImage}
+  imageAlt="Bunu Tech office in Lagos, Nigeria"
+  jsonLd={structuredData}
+>
+  <PageHero
+    title="Contact Us"
+    description="Talk to our team about your next construction, facility management or curtain walling project."
+    image="1497366216548-37526070297c"
+    imageAlt="Bunu Tech team in a modern office in Lagos"
+  />
+
+  <section aria-labelledby="contact-heading" class="bg-white py-14 sm:py-16 lg:py-20">
+    <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-5">
+        <h2 id="contact-heading" class="eyebrow">Get In Touch</h2>
+        <hr class="rule-brand" />
+        <p class="body-copy mt-6">
+          Whether it be a project of small or large scale, private or commercial, we have the resources and the
+          knowledge to deliver services of unmatched standard and quality. Reach out and a member of our team will
+          respond within one business day.
+        </p>
+
+        <ul class="mt-8 space-y-3">
+          {
+            details.map((detail) => (
+              <li class="flex gap-4 border border-line p-4">
+                <span class="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center bg-brand/10 text-brand">
+                  <svg
+                    class="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    {icons[detail.icon].map((d) => <path d={d} />)}
+                  </svg>
+                </span>
+                <div>
+                  <p class="text-[11px] tracking-[0.12em] text-muted uppercase">{detail.label}</p>
+                  <address class="mt-1 text-[15px] leading-6 font-bold text-ink not-italic">
+                    {detail.href ? (
+                      <a class="transition-colors hover:text-brand" href={detail.href}>
+                        {detail.lines[0]}
+                      </a>
+                    ) : (
+                      detail.lines.map((line, index) => (
+                        <>
+                          {line}
+                          {index < detail.lines.length - 1 && <br />}
+                        </>
+                      ))
+                    )}
+                  </address>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-6 flex flex-wrap items-center gap-4">
+          <a
+            class="btn-primary"
+            href="https://www.google.com/maps/search/?api=1&query=72+Campbell+Street+Lagos+Island+Lagos+Nigeria"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get Directions
+          </a>
+          <a class="link-underline text-sm" href={`mailto:${site.email}`}>Email us directly</a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7">
+        <div class="border-t-4 border-brand bg-mist p-6 shadow-card sm:p-8 lg:p-10">
+          <h2 class="font-display text-2xl tracking-wide text-ink uppercase">Send Us A Message</h2>
+          <p class="mt-2 text-sm leading-6 text-muted">
+            Fields marked with <span class="text-brand">*</span> are required.
+          </p>
+
+          <!--
+            Front-end demo form: validates and shows a success state, but does not send email.
+            Connect it to Formspree, Netlify Forms, Resend or your own API before launch by
+            replacing the action/method below and removing preventDefault() in the script.
+          -->
+          <form
+            class="mt-7 grid gap-5 sm:grid-cols-2"
+            action={`mailto:${site.email}`}
+            method="post"
+            enctype="text/plain"
+            novalidate
+            data-contact-form
+          >
+            <div>
+              <label class="field-label" for="name">Full name <span class="text-brand">*</span></label>
+              <input
+                class="field"
+                id="name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+                placeholder="Your full name"
+              />
+            </div>
+
+            <div>
+              <label class="field-label" for="email">Email address <span class="text-brand">*</span></label>
+              <input
+                class="field"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                placeholder="you@company.com"
+              />
+            </div>
+
+            <div>
+              <label class="field-label" for="phone">Phone number</label>
+              <input
+                class="field"
+                id="phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                inputmode="tel"
+                placeholder="+234"
+              />
+            </div>
+
+            <div>
+              <label class="field-label" for="service">Service of interest</label>
+              <select class="field" id="service" name="service">
+                <option value="">Select a service</option>
+                {services.map((service) => <option value={service.subject}>{service.title}</option>)}
+                <option value="General enquiry">General enquiry</option>
+              </select>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="field-label" for="message">Message <span class="text-brand">*</span></label>
+              <textarea
+                class="field min-h-40 resize-y"
+                id="message"
+                name="message"
+                rows="6"
+                required
+                placeholder="Tell us about your project, location and timeline."
+              ></textarea>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="flex items-start gap-3 text-sm leading-6 text-muted" for="consent">
+                <input
+                  class="mt-1 h-4 w-4 shrink-0 accent-brand"
+                  id="consent"
+                  name="consent"
+                  type="checkbox"
+                  required
+                />
+                <span>
+                  I agree to be contacted by Bunu Tech about my enquiry.
+                  <span class="text-brand">*</span>
+                </span>
+              </label>
+            </div>
+
+            <div class="hidden" aria-hidden="true">
+              <label for="company-website">Company website</label>
+              <input id="company-website" name="company-website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="sm:col-span-2">
+              <button type="submit" class="btn-primary w-full sm:w-auto">Send Message</button>
+            </div>
+          </form>
+
+          <p
+            class="mt-5 hidden border-l-4 border-brand bg-white px-4 py-3 text-sm leading-6 text-ink"
+            role="status"
+            aria-live="polite"
+            tabindex="-1"
+            data-form-status
+          >
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section aria-labelledby="map-heading" class="bg-mist py-14 sm:py-16">
+    <div class="wrap">
+      <h2 id="map-heading" class="eyebrow">Visit Our Office</h2>
+      <hr class="rule-brand" />
+
+      <div class="mt-6 overflow-hidden border border-line bg-white">
+        <iframe
+          src={mapSrc}
+          title="Map showing Bunu Tech's head office at 72 Campbell Street, Lagos Island"
+          class="h-[320px] w-full sm:h-[420px]"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+
+      <div class="mt-4 flex flex-col gap-2 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+        <p>{site.address.street}, {site.address.locality}, {site.address.region} – {site.address.country}</p>
+        <a
+          class="font-bold text-brand underline underline-offset-4 hover:text-brand-dark"
+          href="https://www.openstreetmap.org/?mlat=6.4550&mlon=3.3950#map=16/6.4550/3.3950"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View larger map
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const status = document.querySelector<HTMLElement>('[data-form-status]');
+  const serviceSelect = document.querySelector<HTMLSelectElement>('#service');
+
+  // Pre-select a service when arriving from a service link, e.g. /contact?subject=Construction
+  const requestedService = new URLSearchParams(window.location.search).get('subject');
+  if (requestedService && serviceSelect) {
+    const match = Array.from(serviceSelect.options).find(
+      (option) => option.value.toLowerCase() === requestedService.toLowerCase(),
+    );
+    if (match) serviceSelect.value = match.value;
+  }
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // Honeypot: real visitors never fill this hidden field.
+    const honeypot = form.querySelector<HTMLInputElement>('#company-website');
+    if (honeypot?.value) return;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    if (status) {
+      status.hidden = false;
+      status.classList.remove('hidden');
+      status.textContent =
+        'Thank you for your message. Our team will review your enquiry and respond within one business day.';
+      status.focus({ preventScroll: false });
+    }
+
+    form.reset();
+  });
+</script>

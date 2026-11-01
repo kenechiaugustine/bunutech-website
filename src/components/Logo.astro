@@ -1,0 +1,30 @@
+---
+interface Props {
+  inverted?: boolean;
+  class?: string;
+}
+
+const { inverted = false, class: className = '' } = Astro.props;
+---
+
+<a
+  href="/"
+  aria-label="Bunu Tech — Home"
+  class:list={['inline-flex items-center gap-2.5', className]}
+>
+  <span
+    class:list={[
+      'grid h-10 w-10 shrink-0 place-items-center bg-brand font-display text-xl leading-none text-white sm:h-11 sm:w-11',
+      inverted && 'bg-white text-brand',
+    ]}
+    aria-hidden="true">B</span
+  >
+  <span
+    class:list={[
+      'font-display text-[19px] tracking-[0.14em] whitespace-nowrap sm:text-[21px]',
+      inverted ? 'text-white' : 'text-ink',
+    ]}
+  >
+    BUNU<span class={inverted ? 'text-white/70' : 'text-brand'}>TECH</span>
+  </span>
+</a>

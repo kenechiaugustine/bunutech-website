@@ -1,0 +1,234 @@
+---
+import { unsplash, unsplashSet } from '../lib/images';
+
+const slides = [
+  {
+    image: '1541888946425-d81bb19240f5',
+    alt: 'Construction site with tower cranes and a rising concrete structure',
+    lines: ['Builders To The Nation', 'Since 1932'],
+  },
+  {
+    image: '1486406146926-c627a92ad1ab',
+    alt: 'Modern high-rise building with a glass facade',
+    lines: ['Legacy built on Quality,', 'Excellence & Innovation'],
+  },
+  {
+    image: '1503387762-592deb58ef4e',
+    alt: 'Completed contemporary building designed and built by Bunu Tech',
+    lines: ['Building and Civil Engineering Contractors'],
+  },
+];
+
+const sizes = '100vw';
+const widths = [640, 1024, 1440, 1920];
+---
+
+<section
+  class="relative isolate h-[300px] overflow-hidden bg-ink sm:h-[430px] lg:h-[550px]"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="Bunu Tech highlights"
+  data-carousel
+>
+  {
+    slides.map((slide, index) => (
+      <div
+        class:list={[
+          'absolute inset-0 transition-opacity duration-700 ease-out',
+          index === 0 ? 'opacity-100' : 'pointer-events-none opacity-0',
+        ]}
+        data-slide
+        role="group"
+        aria-roledescription="slide"
+        aria-label={`${index + 1} of ${slides.length}`}
+        aria-hidden={index === 0 ? 'false' : 'true'}
+        inert={index !== 0}
+      >
+        <img
+          src={unsplash(slide.image, 1440, 810, 65)}
+          srcset={unsplashSet(slide.image, widths, 16 / 9, 65)}
+          sizes={sizes}
+          alt={slide.alt}
+          width="1920"
+          height="900"
+          class="h-full w-full object-cover"
+          loading={index === 0 ? 'eager' : 'lazy'}
+          fetchpriority={index === 0 ? 'high' : 'auto'}
+          decoding="async"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/55 to-ink/15"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent"></div>
+
+        <div class="wrap relative flex h-full items-center">
+          <div class="max-w-3xl pt-2 sm:pt-0">
+            {index === 0 ? (
+              <h1 class="font-display text-[25px] leading-[1.18] tracking-[0.02em] text-white uppercase sm:text-[38px] lg:text-[52px] xl:text-[60px]">
+                {slide.lines.map((line) => <span class="block">{line}{' '}</span>)}
+              </h1>
+            ) : (
+              <h2 class="font-display text-[25px] leading-[1.18] tracking-[0.02em] text-white uppercase sm:text-[38px] lg:text-[52px] xl:text-[60px]">
+                {slide.lines.map((line) => <span class="block">{line}{' '}</span>)}
+              </h2>
+            )}
+
+            <div class="mt-6 flex flex-col gap-3 xs:flex-row sm:mt-10 sm:gap-4">
+              <a href="/contact" class="btn-primary w-full xs:w-auto">Contact Us</a>
+              <a href="#services" class="btn-outline-light w-full xs:w-auto">View Our Services</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+
+  <button
+    type="button"
+    class="absolute top-1/2 left-3 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/40 bg-ink/20 text-white transition-colors hover:bg-brand sm:flex"
+    aria-label="Previous slide"
+    data-prev
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"></path>
+    </svg>
+  </button>
+  <button
+    type="button"
+    class="absolute top-1/2 right-3 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/40 bg-ink/20 text-white transition-colors hover:bg-brand sm:flex"
+    aria-label="Next slide"
+    data-next
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"></path>
+    </svg>
+  </button>
+
+  <div class="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 sm:bottom-7">
+    {
+      slides.map((slide, index) => (
+        <button
+          type="button"
+          class:list={[
+            'h-1 transition-all duration-300',
+            index === 0 ? 'w-12 bg-brand' : 'w-7 bg-white/60 hover:bg-white',
+          ]}
+          aria-label={`Go to slide ${index + 1}: ${slide.lines.join(' ')}`}
+          aria-current={index === 0 ? 'true' : 'false'}
+          data-dot
+        />
+      ))
+    }
+  </div>
+
+  <button
+    type="button"
+    class="absolute right-4 bottom-4 z-20 grid h-10 w-10 place-items-center border border-white/40 bg-ink/30 text-white transition-colors hover:bg-brand"
+    aria-label="Pause slideshow"
+    aria-pressed="false"
+    data-carousel-toggle
+  >
+    <svg data-toggle-icon="pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+      <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+    </svg>
+    <svg data-toggle-icon="play" class="hidden" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M8 5v14l11-7z"></path>
+    </svg>
+  </button>
+
+  <p class="sr-only" aria-live="polite" data-carousel-status>Slide 1 of {slides.length}</p>
+</section>
+
+<script>
+  const carousels = document.querySelectorAll<HTMLElement>('[data-carousel]');
+
+  carousels.forEach((carousel) => {
+    const slides = Array.from(carousel.querySelectorAll<HTMLElement>('[data-slide]'));
+    const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('[data-dot]'));
+    const status = carousel.querySelector<HTMLElement>('[data-carousel-status]');
+    const toggle = carousel.querySelector<HTMLButtonElement>('[data-carousel-toggle]');
+    const pauseIcon = toggle?.querySelector<SVGElement>('[data-toggle-icon="pause"]');
+    const playIcon = toggle?.querySelector<SVGElement>('[data-toggle-icon="play"]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let index = 0;
+    let timer: number | undefined;
+    let paused = reduceMotion;
+
+    const show = (next: number) => {
+      index = (next + slides.length) % slides.length;
+
+      slides.forEach((slide, i) => {
+        const active = i === index;
+        slide.classList.toggle('opacity-100', active);
+        slide.classList.toggle('opacity-0', !active);
+        slide.classList.toggle('pointer-events-none', !active);
+        slide.setAttribute('aria-hidden', String(!active));
+        if (active) slide.removeAttribute('inert');
+        else slide.setAttribute('inert', '');
+
+        slide.querySelectorAll<HTMLElement>('a, button').forEach((element) => {
+          if (active) element.removeAttribute('tabindex');
+          else element.setAttribute('tabindex', '-1');
+        });
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('w-12', i === index);
+        dot.classList.toggle('bg-brand', i === index);
+        dot.classList.toggle('w-7', i !== index);
+        dot.classList.toggle('bg-white/60', i !== index);
+        dot.setAttribute('aria-current', String(i === index));
+      });
+
+      if (status) status.textContent = `Slide ${index + 1} of ${slides.length}`;
+    };
+
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    const start = () => {
+      if (paused) return;
+      stop();
+      timer = window.setInterval(() => show(index + 1), 6500);
+    };
+
+    const setPaused = (value: boolean) => {
+      paused = value;
+      if (paused) stop();
+      else start();
+
+      toggle?.setAttribute('aria-pressed', String(paused));
+      toggle?.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+      pauseIcon?.classList.toggle('hidden', paused);
+      playIcon?.classList.toggle('hidden', !paused);
+    };
+
+    toggle?.addEventListener('click', () => setPaused(!paused));
+
+    carousel.querySelector('[data-prev]')?.addEventListener('click', () => {
+      show(index - 1);
+      start();
+    });
+
+    carousel.querySelector('[data-next]')?.addEventListener('click', () => {
+      show(index + 1);
+      start();
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        show(i);
+        start();
+      });
+    });
+
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+    carousel.addEventListener('focusin', stop);
+    carousel.addEventListener('focusout', start);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+
+    setPaused(reduceMotion);
+  });
+</script>

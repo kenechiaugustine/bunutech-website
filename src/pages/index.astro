@@ -1,11 +1,235 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import CornerMarks from '../components/CornerMarks.astro';
+import { site, projects, services } from '../data/site';
+import { unsplash, unsplashSet } from '../lib/images';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const ogImage = unsplash('1541888946425-d81bb19240f5', 1200, 630, 65);
+const heroImage = unsplash('1541888946425-d81bb19240f5', 1440, 810, 65);
+const heroSrcSet = unsplashSet('1541888946425-d81bb19240f5', [640, 1024, 1440, 1920], 16 / 9, 65);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'GeneralContractor',
+      '@id': `${site.url}/#organization`,
+      name: site.legalName,
+      alternateName: site.name,
+      url: site.url,
+      logo: `${site.url}/favicon.svg`,
+      image: ogImage,
+      description: site.description,
+      foundingDate: site.founded,
+      telephone: site.phone,
+      email: site.email,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: site.address.street,
+        addressLocality: site.address.locality,
+        addressRegion: site.address.region,
+        postalCode: site.address.postalCode,
+        addressCountry: 'NG',
+      },
+      areaServed: { '@type': 'Country', name: 'Nigeria' },
+      sameAs: [site.social.linkedin, site.social.instagram],
+      knowsAbout: [
+        'Building construction',
+        'Civil engineering',
+        'Facility management',
+        'Aluminium windows',
+        'Curtain walling',
+      ],
+      hasCredential: site.certifications.map((certification) => ({
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'certification',
+        name: certification,
+      })),
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      publisher: { '@id': `${site.url}/#organization` },
+      inLanguage: 'en-NG',
+    },
+  ],
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Bunu Tech | Building & Civil Engineering Contractors in Nigeria"
+  description="Bunu Tech is a leading building and civil engineering contractor in Nigeria, delivering construction, facility management and curtain walling services since 1932."
+  image={ogImage}
+  imageAlt="Bunu Tech construction site with cranes in Nigeria"
+  preloadImage={{ href: heroImage, srcset: heroSrcSet, sizes: '100vw' }}
+  jsonLd={structuredData}
+>
+  <Hero />
+
+  <!-- About -->
+  <section id="about" aria-labelledby="about-heading" class="bg-white">
+    <div class="grid lg:grid-cols-2">
+      <div class="px-6 py-14 sm:px-10 sm:py-16 lg:py-20 lg:pr-[7%] lg:pl-[8%] xl:pl-[10%]">
+        <h2 id="about-heading" class="eyebrow">About Us</h2>
+        <hr class="rule-brand" />
+        <p class="body-copy mt-6 text-justify">
+          Bunu Tech Ltd is a leading building and civil engineering contracting firm in Nigeria, with over 90
+          years of experience and a solid reputation built on its history, professionalism and commitment to
+          service excellence.
+        </p>
+        <a href="/about" class="link-underline mt-8 text-lg">Learn more</a>
+      </div>
+
+      <div class="relative min-h-[300px] sm:min-h-[420px] lg:min-h-[520px]">
+        <img
+          src={unsplash('1504307651254-35680f356dfd', 1200, 900, 65)}
+          srcset={unsplashSet('1504307651254-35680f356dfd', [640, 900, 1200, 1600], 4 / 3, 65)}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          alt="Bunu Tech engineers reviewing progress on a construction site"
+          width="1200"
+          height="900"
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+        <CornerMarks />
+      </div>
+    </div>
+  </section>
+
+  <div class="h-[1.3em] bg-mist" aria-hidden="true"></div>
+
+  <!-- Services -->
+  <section id="services" aria-labelledby="services-heading" class="bg-white">
+    <div class="grid lg:grid-cols-2">
+      <div class="relative order-2 min-h-[300px] sm:min-h-[420px] lg:order-1 lg:min-h-[560px]">
+        <img
+          src={unsplash('1516156008625-3a9d6067fab5', 1200, 1000, 65)}
+          srcset={unsplashSet('1516156008625-3a9d6067fab5', [640, 900, 1200, 1600], 6 / 5, 65)}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          alt="Bunu Tech specialists installing the structure of a commercial building"
+          width="1200"
+          height="1000"
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+        <CornerMarks />
+      </div>
+
+      <div class="order-1 px-6 py-14 sm:px-10 sm:py-16 lg:order-2 lg:py-20 lg:pr-[8%] lg:pl-[7%]">
+        <h2 id="services-heading" class="eyebrow">Our Services</h2>
+        <hr class="rule-brand" />
+        <p class="body-copy mt-6 text-justify">
+          Bunu Tech offers to all clients, commercial and private, a broad range of multidisciplinary contracted
+          services to ensure seamless operation of their new or existing facilities.
+        </p>
+
+        <ul class="mt-8 space-y-1">
+          {
+            services.map((service) => (
+              <li>
+                <a
+                  href={`/contact?subject=${encodeURIComponent(service.subject)}`}
+                  class="group flex items-start justify-between gap-5 border-b border-line py-4"
+                >
+                  <span>
+                    <span class="block text-lg font-bold text-ink transition-colors group-hover:text-brand">
+                      {service.title}
+                    </span>
+                    <span class="mt-1 block text-sm leading-6 text-muted">{service.description}</span>
+                  </span>
+                  <svg
+                    class="mt-1 shrink-0 text-brand transition-transform duration-200 group-hover:translate-x-1"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured projects -->
+  <section id="projects" aria-labelledby="projects-heading" class="bg-mist px-2 py-5 sm:px-4 sm:py-6">
+    <div class="mx-auto w-full bg-white p-6 shadow-card sm:p-10 lg:p-12">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 id="projects-heading" class="font-display text-2xl tracking-wide text-muted sm:text-3xl">
+          Featured Projects
+        </h2>
+        <p class="text-[11px] tracking-[0.14em] text-muted uppercase">Selected work across Nigeria</p>
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          projects.map((project) => (
+            <article class="group relative overflow-hidden bg-ink">
+              <img
+                src={unsplash(project.image, 700, 525, 62)}
+                srcset={unsplashSet(project.image, [400, 600, 800, 1000], 4 / 3, 62)}
+                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                alt={project.alt}
+                width="800"
+                height="600"
+                class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/25 to-transparent"></div>
+              <div class="absolute inset-x-0 bottom-0 p-4">
+                <h3 class="text-[13px] leading-snug font-bold text-white uppercase">{project.name}</h3>
+                <p class="mt-1.5 text-[10px] tracking-[0.14em] text-white/75 uppercase">{project.location}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-9 text-center">
+        <a href="/contact?subject=Project%20enquiry" class="btn-primary">View All Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact call to action -->
+  <section class="relative isolate overflow-hidden bg-ink py-16 sm:py-20 lg:py-24" aria-labelledby="cta-heading">
+    <img
+      src={unsplash('1531834685032-c34bf0d84c77', 1600, 900, 55)}
+      srcset={unsplashSet('1531834685032-c34bf0d84c77', [768, 1200, 1600, 1920], 16 / 9, 55)}
+      sizes="100vw"
+      alt=""
+      aria-hidden="true"
+      width="1600"
+      height="900"
+      class="absolute inset-0 -z-10 h-full w-full object-cover"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="absolute inset-0 -z-10 bg-ink/75"></div>
+
+    <div class="wrap">
+      <h2 id="cta-heading" class="sr-only">Work with Bunu Tech</h2>
+      <p class="max-w-5xl text-lg leading-8 text-justify text-white sm:text-xl sm:leading-9 lg:text-[25px] lg:leading-[30px]">
+        Whether it be a project of small or large scale, private or commercial, we have the resources and the
+        knowledge to deliver services of unmatched standard and quality. This is why we still remain at the
+        forefront in our field, after nearly a century of successful activity.
+      </p>
+      <div class="mt-8 text-center">
+        <a href="/contact" class="btn-primary">Contact Us</a>
+      </div>
+    </div>
+  </section>
 </Layout>

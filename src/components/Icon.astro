@@ -1,0 +1,43 @@
+---
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className = 'h-6 w-6' } = Astro.props;
+
+const paths: Record<string, string[]> = {
+  value: ['M6 3h12l4 6-10 12L2 9l4-6Z', 'M2 9h20', 'M12 21 8 9l4-6 4 6-4 12'],
+  cost: ['M4 3h16v18H4z', 'M8 7h8', 'M8 12h8', 'M8 17h4'],
+  relationship: [
+    'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2',
+    'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z',
+    'M22 21v-2a4 4 0 0 0-3-3.87',
+    'M16 3.13a4 4 0 0 1 0 7.75',
+  ],
+  quality: ['M12 2 20 6v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4Z', 'm9 12 2 2 4-4'],
+  strength: ['M3 21h18', 'M5 21V7l7-4 7 4v14', 'M9 9h.01', 'M15 9h.01', 'M9 13h.01', 'M15 13h.01', 'M9 17h.01', 'M15 17h.01'],
+  talent: [
+    'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2',
+    'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z',
+    'M22 21v-2a4 4 0 0 0-3-3.87',
+    'M16 3.13a4 4 0 0 1 0 7.75',
+  ],
+  safety: ['M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z', 'm9 12 2 2 4-4'],
+  experience: ['M3 12a9 9 0 1 0 9-9 9 9 0 0 0-9 9Z', 'M12 7v5l3 2'],
+  diversity: ['M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z', 'M2 12h20', 'M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z'],
+};
+---
+
+<svg
+  class={className}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  {paths[name]?.map((d) => <path d={d} />)}
+</svg>

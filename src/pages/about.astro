@@ -1,0 +1,314 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CornerMarks from '../components/CornerMarks.astro';
+import Icon from '../components/Icon.astro';
+import { site, board, awards, differentiators, history } from '../data/site';
+import { unsplash, unsplashSet } from '../lib/images';
+
+const ogImage = unsplash('1487958449943-2429e8be8625', 1200, 630, 65);
+
+const vision = [
+  'To be the leader and ultimate point of reference in Nigeria’s building construction industry.',
+  'To make an economic and social impact to Nigeria’s growth and development.',
+  'To be renowned for always delivering the best quality of services and being the company our employees are proud to work for.',
+];
+
+const mission = [
+  'To provide our clients with the highest quality of building structures by utilising state-of-the-art equipment, the latest technologies and unparalleled expertise.',
+  'To foster new and existing relationships with our clients by always exceeding their expectations.',
+  'To incentivise a company culture that promotes health and safety and encourages ethical conduct.',
+];
+
+const values = [
+  'We believe in running our business ethically and with integrity, following in our founders’ footsteps.',
+  'We are of the belief that our workforce should be enabled to perform at their best and, therefore, we continuously invest in their professional development.',
+  'We focus our efforts on health and safety, too, ensuring we are always compliant with the latest regulations.',
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'AboutPage',
+      '@id': `${site.url}/about#webpage`,
+      url: `${site.url}/about`,
+      name: 'About Bunu Tech',
+      description:
+        'Learn about Bunu Tech, a leading building and civil engineering contractor in Nigeria since 1932.',
+      isPartOf: { '@id': `${site.url}/#website` },
+      about: { '@id': `${site.url}/#organization` },
+      inLanguage: 'en-NG',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+        { '@type': 'ListItem', position: 2, name: 'About Us', item: `${site.url}/about` },
+      ],
+    },
+  ],
+};
+---
+
+<Layout
+  title="About Us | Bunu Tech — Building Nigeria Since 1932"
+  description="Discover Bunu Tech's history, vision, mission, values, HSE policy and leadership team. A leading building and civil engineering contractor in Nigeria since 1932."
+  image={ogImage}
+  imageAlt="Bunu Tech corporate building project"
+  jsonLd={structuredData}
+>
+  <PageHero
+    title="About Us"
+    description="A legacy of quality, excellence and innovation, built in Nigeria since 1932."
+    image="1487958449943-2429e8be8625"
+    imageAlt="Modern commercial building delivered by Bunu Tech"
+  />
+
+  <!-- Company -->
+  <section id="company" aria-labelledby="company-heading" class="scroll-mt-6 bg-white py-14 sm:py-16 lg:py-20">
+    <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-7">
+        <h2 id="company-heading" class="eyebrow">Bunu Tech Ltd</h2>
+        <hr class="rule-brand" />
+        <p class="body-copy mt-6 text-justify">
+          <strong class="font-bold text-ink">Bunu Tech Ltd</strong> is a leading building and civil engineering
+          contracting firm in Nigeria. Established in 1932 by two Italian entrepreneurs, it is nearing a century
+          of unparalleled expertise, making it the oldest and one of the most prominent companies in the Nigerian
+          construction industry today. Thanks to a team of qualified professionals, coupled with state-of-the-art
+          equipment and technologies, the company has built a solid reputation based on its history,
+          professionalism and commitment to service excellence.
+        </p>
+        <p class="body-copy mt-4 text-justify">
+          Throughout the years, Bunu Tech has diversified the organisation’s activities by providing also Facility
+          Management services as well as highly specialised expertise in the fields of aluminium windows and
+          curtain walling, all of which have been operating for over 25 years.
+        </p>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="relative min-h-[300px] sm:min-h-[400px]">
+          <img
+            src={unsplash('1486406146926-c627a92ad1ab', 900, 1100, 65)}
+            srcset={unsplashSet('1486406146926-c627a92ad1ab', [480, 640, 900, 1200], 900 / 1100, 65)}
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            alt="Bunu Tech high-rise construction project"
+            width="900"
+            height="1100"
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+          <CornerMarks />
+        </div>
+
+        <dl class="mt-6 grid grid-cols-3 gap-3 text-center">
+          <div class="flex flex-col-reverse border border-line px-2 py-4">
+            <dt class="order-2 mt-1 text-[10px] tracking-[0.12em] text-muted uppercase">Years of experience</dt>
+            <dd class="font-display text-2xl text-brand">90+</dd>
+          </div>
+          <div class="flex flex-col-reverse border border-line px-2 py-4">
+            <dt class="order-2 mt-1 text-[10px] tracking-[0.12em] text-muted uppercase">Board members</dt>
+            <dd class="font-display text-2xl text-brand">10</dd>
+          </div>
+          <div class="flex flex-col-reverse border border-line px-2 py-4">
+            <dt class="order-2 mt-1 text-[10px] tracking-[0.12em] text-muted uppercase">ISO certified</dt>
+            <dd class="font-display text-2xl text-brand">3</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision, mission, values -->
+  <section aria-labelledby="vision-heading" class="bg-mist py-14 sm:py-16 lg:py-20">
+    <div class="wrap">
+      <h2 id="vision-heading" class="sr-only">Vision, mission and values</h2>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          [
+            { title: 'Our Vision', items: vision },
+            { title: 'Our Mission', items: mission },
+            { title: 'Our Values', items: values },
+          ].map((block) => (
+            <article class="border-t-4 border-brand bg-white p-6 shadow-card sm:p-8">
+              <h3 class="font-display text-xl tracking-wide text-brand uppercase">{block.title}</h3>
+              <ul class="mt-5 space-y-4">
+                {block.items.map((item) => (
+                  <li class="flex gap-3 text-[15px] leading-6 text-muted">
+                    <svg
+                      class="mt-0.5 h-5 w-5 shrink-0 text-brand"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      aria-hidden="true"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- HSE + awards -->
+  <section id="hse" aria-labelledby="hse-heading" class="scroll-mt-6 bg-white py-14 sm:py-16 lg:py-20">
+    <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-7">
+        <h2 id="hse-heading" class="eyebrow">HSE Policy</h2>
+        <hr class="rule-brand" />
+
+        <div class="mt-6 space-y-4">
+          <p class="body-copy text-justify">
+            Bunu Tech strongly believes in the importance of solid and structured Health, Safety and Environment
+            (HSE) policies to ensure quality performance, effective management and delivery of high standard
+            results, in a safe working environment.
+          </p>
+          <p class="body-copy text-justify">
+            We take pride in maintaining a safety culture that adheres to national and international standards and
+            best practice. Every aspect of construction and maintenance activities carried out by both Bunu Tech
+            as the main contractor and its subcontractors are always fully in line with both country legislation
+            and standard project safety requirements.
+          </p>
+          <p class="body-copy text-justify">
+            Bunu Tech’s overall HSE target is zero incident: no injury, ill health or incident should be caused by
+            our work activities, and our commitment will always be that of ensuring that people, the environment
+            and sustainability remain at the heart of what we do.
+          </p>
+        </div>
+
+        <div class="mt-8 grid gap-3 sm:grid-cols-3">
+          {
+            [
+              { value: 'Zero', label: 'Incident target' },
+              { value: '100%', label: 'Regulatory compliance' },
+              { value: '5', label: 'HSE awards in recent years' },
+            ].map((stat) => (
+              <div class="border-l-4 border-brand bg-mist px-4 py-3">
+                <p class="font-display text-2xl text-brand">{stat.value}</p>
+                <p class="mt-1 text-[11px] tracking-[0.1em] text-muted uppercase">{stat.label}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div id="awards" class="scroll-mt-6 lg:col-span-5">
+        <h3 class="font-display text-2xl tracking-wide text-ink uppercase">Awards, Recognitions, CSR</h3>
+        <p class="mt-3 text-sm leading-6 text-muted">
+          Our safety culture has been recognised by various clients and organisations over the years, especially
+          in the oil and gas sector.
+        </p>
+
+        <ul class="mt-6 space-y-3">
+          {
+            awards.map((award) => (
+              <li class="border border-line bg-white p-4">
+                <p class="text-[15px] leading-snug font-bold text-ink">{award.title}</p>
+                <p class="mt-1 text-sm text-muted">{award.detail}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Board -->
+  <section aria-labelledby="board-heading" class="bg-mist py-14 sm:py-16 lg:py-20">
+    <div class="wrap">
+      <div class="max-w-3xl">
+        <h2 id="board-heading" class="eyebrow">Board of Directors</h2>
+        <hr class="rule-brand" />
+        <p class="body-copy mt-6 text-justify">
+          At the heart of Bunu Tech’s vision, mission and values is our Board of Directors, in charge of setting
+          business strategies and structures for our current operations, as well as future developments. At
+          present, our Board of Directors comprises ten members.
+        </p>
+      </div>
+
+      <ul class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        {
+          board.map((member) => (
+            <li class="bg-white shadow-card">
+              <img
+                src={`https://placehold.co/480x560/e5e5e5/666?text=${encodeURIComponent(member.name)}&font=lato`}
+                alt={`Portrait of ${member.name}`}
+                width="480"
+                height="560"
+                class="aspect-[6/7] w-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="p-4">
+                <h3 class="text-[15px] leading-snug font-bold text-ink">{member.name}</h3>
+                <p class="mt-1 text-[11px] tracking-[0.1em] text-brand uppercase">{member.role}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Differentiators -->
+  <section aria-labelledby="differentiators-heading" class="bg-white py-14 sm:py-16 lg:py-20">
+    <div class="wrap">
+      <div class="max-w-3xl">
+        <h2 id="differentiators-heading" class="eyebrow">What We Distinguish Ourselves For</h2>
+        <hr class="rule-brand" />
+      </div>
+
+      <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          differentiators.map((item) => (
+            <li class="group border border-line p-6 transition-colors hover:border-brand">
+              <span class="inline-flex h-11 w-11 items-center justify-center bg-brand/10 text-brand">
+                <Icon name={item.icon} class="h-6 w-6" />
+              </span>
+              <h3 class="mt-4 font-display text-lg tracking-wide text-ink uppercase">{item.title}</h3>
+              <p class="mt-2 text-[15px] leading-6 text-muted">{item.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- History -->
+  <section id="history" aria-labelledby="history-heading" class="scroll-mt-6 bg-mist py-14 sm:py-16 lg:py-20">
+    <div class="wrap">
+      <div class="max-w-3xl">
+        <h2 id="history-heading" class="eyebrow">Company History</h2>
+        <hr class="rule-brand" />
+        <p class="body-copy mt-6">
+          From a small partnership in Lagos to one of Nigeria’s most established construction firms, our story
+          spans nearly a century of building the nation.
+        </p>
+      </div>
+
+      <ol class="mt-10 space-y-8 border-l-2 border-brand/30 pl-6 sm:pl-10">
+        {
+          history.map((entry) => (
+            <li class="relative">
+              <span
+                class="absolute top-1.5 -left-[31px] h-4 w-4 border-4 border-white bg-brand sm:-left-[47px]"
+                aria-hidden="true"
+              />
+              <p class="font-display text-sm tracking-[0.14em] text-brand uppercase">{entry.period}</p>
+              <h3 class="mt-2 font-display text-xl tracking-wide text-ink uppercase sm:text-2xl">{entry.title}</h3>
+              <p class="mt-3 max-w-4xl text-[15px] leading-7 text-muted">{entry.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</Layout>
