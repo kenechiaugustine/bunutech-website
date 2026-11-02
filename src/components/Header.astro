@@ -10,7 +10,10 @@ const isActive = (href: string) => {
 };
 ---
 
-<header class="relative z-50 bg-white">
+<header
+  class="sticky top-0 z-50 bg-white transition-shadow duration-200 data-[scrolled=true]:shadow-[0_6px_18px_rgba(0,0,0,0.09)]"
+  data-header
+>
   <div class="wrap flex items-center justify-between gap-4 py-4 lg:py-5">
     <Logo />
 
@@ -181,10 +184,18 @@ const isActive = (href: string) => {
 </header>
 
 <script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
   const menuToggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const mobileMenu = document.querySelector<HTMLElement>('[data-mobile-menu]');
   const menuIconOpen = document.querySelector<SVGElement>('[data-menu-icon="open"]');
   const menuIconClose = document.querySelector<SVGElement>('[data-menu-icon="close"]');
+
+  // Add a shadow once the sticky header starts overlapping page content.
+  const setHeaderShadow = () => {
+    if (header) header.dataset.scrolled = String(window.scrollY > 8);
+  };
+  setHeaderShadow();
+  window.addEventListener('scroll', setHeaderShadow, { passive: true });
 
   function setMenu(open: boolean) {
     if (!menuToggle || !mobileMenu) return;
