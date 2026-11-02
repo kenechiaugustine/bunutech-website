@@ -5,8 +5,6 @@ import { site, services } from '../data/site';
 import { unsplash } from '../lib/images';
 
 const ogImage = unsplash('1497366216548-37526070297c', 1200, 630, 65);
-const mapSrc =
-  'https://www.openstreetmap.org/export/embed.html?bbox=3.3850%2C6.4480%2C3.4050%2C6.4620&layer=mapnik&marker=6.4550%2C3.3950';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -291,35 +289,6 @@ const icons: Record<string, string[]> = {
     </div>
   </section>
 
-  <!-- Map -->
-  <section aria-labelledby="map-heading" class="bg-mist py-14 sm:py-16">
-    <div class="wrap">
-      <h2 id="map-heading" class="eyebrow">Visit Our Office</h2>
-      <hr class="rule-brand" />
-
-      <div class="mt-6 overflow-hidden border border-line bg-white">
-        <iframe
-          src={mapSrc}
-          title="Map showing Bunu Tech's head office at 72 Campbell Street, Lagos Island"
-          class="h-[320px] w-full sm:h-[420px]"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
-
-      <div class="mt-4 flex flex-col gap-2 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
-        <p>{site.address.street}, {site.address.locality}, {site.address.region} – {site.address.country}</p>
-        <a
-          class="font-bold text-brand underline underline-offset-4 hover:text-brand-dark"
-          href="https://www.openstreetmap.org/?mlat=6.4550&mlon=3.3950#map=16/6.4550/3.3950"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View larger map
-        </a>
-      </div>
-    </div>
-  </section>
 </Layout>
 
 <script>
