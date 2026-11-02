@@ -1,10 +1,10 @@
 export const site = {
-  name: 'Bunu Tech',
-  legalName: 'Bunu Tech Ltd',
+  name: 'Bunutech Construction',
+  legalName: 'Bunutech Construction',
   url: 'https://www.bunutechconstructions.com',
   tagline: 'Building and civil engineering contractors',
   description:
-    'Bunu Tech is a leading building and civil engineering contracting firm in Nigeria, delivering construction, facility management and aluminium and curtain walling services since 1932.',
+    'Bunutech Construction is a building and civil engineering contracting firm in Nigeria. Founded in 2016 by Musa Yusuf, an Architectural Technologist, the company brings technical expertise and practical construction knowledge together to deliver quality projects.',
   phone: '08147263685',
   phoneHref: '+2348147263685',
   email: 'support@bunutechconstructions.com',
@@ -16,13 +16,25 @@ export const site = {
     postalCode: '101001',
   },
   hours: 'Monday – Friday, 8:00am – 5:00pm',
-  founded: '1932',
+  founded: '2016',
   social: {
-    linkedin: 'https://www.linkedin.com/company/bunu-tech',
-    instagram: 'https://www.instagram.com/bunutech',
+    linkedin:
+      'https://www.linkedin.com/in/yusuf-musa-822a19428?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
+    facebook: 'https://www.facebook.com/share/1dCNeoxJkK/?mibextid=wwXIfr',
   },
   certifications: ['ISO 9001:2015', 'ISO 14001:2015', 'ISO 45001:2018'],
 };
+
+export const aboutCopy = [
+  'Bunutech Construction is a building and civil engineering contracting firm in Nigeria. Founded in 2016 by Musa Yusuf, an Architectural Technologist, the company brings technical expertise and practical construction knowledge together to deliver quality projects.',
+  'With a strong foundation in architectural technology and hands-on site experience, Bunutech Construction has built a reputation for professionalism, attention to detail, and reliable project delivery. The company continues to grow by combining technical skill with a commitment to excellence in every project undertaken.',
+];
+
+export const servicesIntro =
+  'Bunutech Construction provides comprehensive building construction services, covering the full project cycle from design to final finishing.';
+
+export const servicesOutro =
+  'We handle projects with technical precision and attention to detail, ensuring quality delivery from the design stage through to completion.';
 
 export const nav = [
   { label: 'Home', href: '/' },
@@ -31,17 +43,21 @@ export const nav = [
     href: '/about',
     children: [
       { label: 'Company', href: '/about#company' },
+      { label: 'Our Team', href: '/about#team' },
       { label: 'Company History', href: '/about#history' },
-      { label: 'Awards, Recognitions, CSR', href: '/about#awards' },
     ],
   },
   {
     label: 'Services',
     href: '/#services',
     children: [
-      { label: 'Construction', href: '/#services' },
-      { label: 'Facility Management', href: '/#services' },
-      { label: 'Aluminium Windows and Curtain Walling', href: '/#services' },
+      { label: 'Architectural Drawings', href: '/#services' },
+      { label: 'Mechanical Drawings', href: '/#services' },
+      { label: 'Electrical Drawings', href: '/#services' },
+      { label: 'Building Construction', href: '/#services' },
+      { label: 'Landscaping', href: '/#services' },
+      { label: 'Interior Finishing', href: '/#services' },
+      { label: 'Exterior Finishing', href: '/#services' },
     ],
   },
   { label: 'Projects', href: '/#projects' },
@@ -107,59 +123,34 @@ export const projects: Project[] = [
 ];
 
 export const services = [
-  {
-    title: 'Construction',
-    description:
-      'Building and civil engineering works delivered end to end, from groundwork and structures to finishes and handover.',
-    subject: 'Construction',
-  },
-  {
-    title: 'Facility Management',
-    description:
-      'Daily upkeep, reactive repairs and scheduled maintenance that protect the value and performance of your facilities.',
-    subject: 'Facility Management',
-  },
-  {
-    title: 'Aluminium Windows and Curtain Walling',
-    description:
-      'Specialist design, fabrication and installation of aluminium windows and curtain walling systems.',
-    subject: 'Aluminium Windows and Curtain Walling',
-  },
+  { title: 'Architectural Drawings', subject: 'Architectural Drawings' },
+  { title: 'Mechanical Drawings', subject: 'Mechanical Drawings' },
+  { title: 'Electrical Drawings', subject: 'Electrical Drawings' },
+  { title: 'Building Construction', subject: 'Building Construction' },
+  { title: 'Landscaping', subject: 'Landscaping' },
+  { title: 'Interior Finishing', subject: 'Interior Finishing' },
+  { title: 'Exterior Finishing', subject: 'Exterior Finishing' },
 ];
 
-export const board = [
-  { name: 'Musa Yusuf', role: 'Chairman / CEO' },
-  { name: 'Amina Bello', role: 'Vice Chairman' },
-  { name: 'Marco Bellini', role: 'Managing Director' },
-  { name: 'Engr. Adetokunbo Coker', role: 'Non-Executive Director' },
-  { name: 'Antonino Falduto', role: 'Executive Director Finance' },
-  { name: 'Mattia Perazzo', role: 'Executive Director Commercial' },
-  { name: 'Andreas Koumpatis', role: 'Executive Director Technical' },
-  { name: 'Abdul Rafiu B. Adewale', role: 'Non-Executive Director' },
-  { name: 'Dr. Shamsideen A. Dosunmu', role: 'Non-Executive Director' },
-  { name: 'Sunday O. Osobu', role: 'Non-Executive Director' },
-];
+export type TeamMember = {
+  name: string;
+  role: string;
+  bio?: string;
+};
 
-export const awards = [
+export const team: TeamMember[] = [
   {
-    title: 'One Million Injury-Free Man-Hours',
-    detail: 'Awarded by Chevron in 2006.',
+    name: 'Arc. Yusuf Musa',
+    role: 'Founder & CEO',
+    bio: 'Often referred to online as Comr. Musa Yusuf, he is an architect and a realtor, and is noted as a president emeritus of an architecture department. He leads Bunutech Construction, a real estate and construction firm operating in all parts of Nigeria. His work emphasizes designing functional structures, sketching modern properties, and offering real estate investments across Nigeria and wider Africa.',
   },
   {
-    title: '3.8 Million Hours Without a Recordable Injury',
-    detail: 'Awarded by ExxonMobil in 2016.',
+    name: 'Ibrahim Ahmed',
+    role: 'Engineer',
   },
   {
-    title: 'Lagos State Safety Commission Vision Zero Compliance Award',
-    detail: 'Awarded by Lagos State Government in 2018.',
-  },
-  {
-    title: '2 Million Lost Time Injury (LTI) Free Manhours on AATC Construction Project',
-    detail: 'Awarded by Afreximbank in 2024.',
-  },
-  {
-    title: '3 Million Lost Time Injury (LTI) Free Manhours on AMCE Construction Project',
-    detail: 'Awarded by Afreximbank in 2024.',
+    name: 'Kenechukwu Arionye',
+    role: 'Chief Technical Officer',
   },
 ];
 
@@ -196,12 +187,12 @@ export const differentiators = [
   },
   {
     title: 'Safety',
-    text: 'Excellent safety record with awards for comprehensive HSE programmes.',
+    text: 'Health, safety and the environment stay at the centre of how every project is delivered.',
     icon: 'safety',
   },
   {
-    title: 'Decades of Experience',
-    text: 'Unparalleled expertise gained from nearly a century of top-quality services.',
+    title: 'Technical Expertise',
+    text: 'Architectural technology and hands-on site experience, applied with care on every project since 2016.',
     icon: 'experience',
   },
   {
@@ -213,28 +204,13 @@ export const differentiators = [
 
 export const history = [
   {
-    period: '1932',
-    title: 'The Founders',
-    text: 'Bunu Tech was established as a partnership in Nigeria in 1932 by two young Italian entrepreneurs. From an undercapitalised business operating within the static economic conditions of the time, the two partners managed to secure a foothold thanks to an initial series of small jobs commissioned by the Catholic Mission in Lagos.',
+    period: '2016',
+    title: 'The Founding',
+    text: 'Bunutech Construction was founded in 2016 by Musa Yusuf, an Architectural Technologist. The company was established to bring technical expertise and practical construction knowledge together, and to deliver quality building and civil engineering projects in Nigeria.',
   },
   {
-    period: '1932 – 1960',
-    title: 'The Early Years',
-    text: 'With a growing team of skilled artisans and competent supervisors, a sound base for continued development was established. The difficult early years appeared to be over in 1939, when Bunu Tech was awarded the construction of Kingsway Stores in Lagos. After a setback due to the Second World War, Bunu Tech was rapidly re-established and enlarged, ready to accept the challenges Nigeria’s post-war economic growth offered.',
-  },
-  {
-    period: '1960 – 1990',
-    title: 'The Post-Independence Period',
-    text: 'The post-independence period witnessed an upturn in the construction industry. Throughout those years, Bunu Tech can be credited for a wide variety of projects spanning the whole nation. The need for more construction companies, necessitated by the growth in the country, presented new challenges to Bunu Tech. Being pioneers in their field, with several years of experience, the company found itself in the position to act as a training ground for many professionals, who went on to start their own construction companies. Bunu Tech, in the spirit of free and fair entrepreneurship, did not try to stop encouraging this.',
-  },
-  {
-    period: '1990 – 2000',
-    title: 'Progress and Innovation',
-    text: 'In 1991, Bunu Tech became a public limited company. The nineties also saw the continuation of construction work in Abuja, which led the company to consolidate its presence there with a permanent base camp, offices and yard. Several major projects were carried out throughout Lagos State, too.',
-  },
-  {
-    period: '2000 – Present Day',
-    title: 'Achieving 90 Years of Quality and Excellence',
-    text: 'The decade leading up to the 80th anniversary of Bunu Tech in 2012 as well as the present years have witnessed an impressive period of growth, during which more than 60 major projects were successfully completed. Throughout the years, the company has diversified its activities by providing also Facility Management services, which include daily upkeep of the constructed properties as well as reactive and scheduled maintenance. Bunu Tech also offers highly specialised expertise in the field of aluminium windows and curtain walling.',
+    period: '2016 – Present',
+    title: 'A Reputation for Delivery',
+    text: 'With a strong foundation in architectural technology and hands-on site experience, Bunutech Construction has built a reputation for professionalism, attention to detail, and reliable project delivery. The company continues to grow by combining technical skill with a commitment to excellence in every project undertaken.',
   },
 ];

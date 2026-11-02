@@ -15,8 +15,9 @@ const structuredData = {
       '@type': 'ContactPage',
       '@id': `${site.url}/contact#webpage`,
       url: `${site.url}/contact`,
-      name: 'Contact Bunu Tech',
-      description: 'Contact Bunu Tech for construction, facility management and curtain walling enquiries.',
+      name: 'Contact Bunutech Construction',
+      description:
+        'Contact Bunutech Construction for architectural drawings, building construction, landscaping and finishing.',
       isPartOf: { '@id': `${site.url}/#website` },
       about: { '@id': `${site.url}/#organization` },
       inLanguage: 'en-NG',
@@ -94,17 +95,17 @@ const icons: Record<string, string[]> = {
 ---
 
 <Layout
-  title="Contact Us | Bunu Tech — Let’s Build Together"
-  description="Contact Bunu Tech in Lagos for construction, facility management and aluminium and curtain walling enquiries. Call 08147263685 or send us a message."
+  title="Contact Us | Bunutech Construction"
+  description={`Contact Bunutech Construction in Lagos about your next building project. Call ${site.phone} or send us a message.`}
   image={ogImage}
-  imageAlt="Bunu Tech office in Lagos, Nigeria"
+  imageAlt="Bunutech Construction office in Lagos, Nigeria"
   jsonLd={structuredData}
 >
   <PageHero
     title="Contact Us"
-    description="Talk to our team about your next construction, facility management or curtain walling project."
+    description="Talk to our team about drawings, building construction, landscaping or finishing."
     image="1497366216548-37526070297c"
-    imageAlt="Bunu Tech team in a modern office in Lagos"
+    imageAlt="Bunutech Construction team in a modern office in Lagos"
   />
 
   <section aria-labelledby="contact-heading" class="bg-white py-14 sm:py-16 lg:py-20">
@@ -113,8 +114,8 @@ const icons: Record<string, string[]> = {
         <h2 id="contact-heading" class="eyebrow">Get In Touch</h2>
         <hr class="rule-brand" />
         <p class="body-copy mt-6">
-          Whether it be a project of small or large scale, private or commercial, we have the resources and the
-          knowledge to deliver services of unmatched standard and quality. Reach out and a member of our team will
+          Whether it be a project of small or large scale, private or commercial, we bring technical expertise and
+          hands-on site experience from design through to completion. Reach out and a member of our team will
           respond within one business day.
         </p>
 

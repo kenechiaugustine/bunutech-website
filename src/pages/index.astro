@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CornerMarks from '../components/CornerMarks.astro';
-import { site, projects, services } from '../data/site';
+import { site, aboutCopy, projects, services, servicesIntro, servicesOutro } from '../data/site';
 import { unsplash, unsplashSet } from '../lib/images';
 
 const ogImage = unsplash('1541888946425-d81bb19240f5', 1200, 630, 65);
@@ -33,14 +33,8 @@ const structuredData = {
         addressCountry: 'NG',
       },
       areaServed: { '@type': 'Country', name: 'Nigeria' },
-      sameAs: [site.social.linkedin, site.social.instagram],
-      knowsAbout: [
-        'Building construction',
-        'Civil engineering',
-        'Facility management',
-        'Aluminium windows',
-        'Curtain walling',
-      ],
+      sameAs: [site.social.linkedin, site.social.facebook],
+      knowsAbout: services.map((service) => service.title),
       hasCredential: site.certifications.map((certification) => ({
         '@type': 'EducationalOccupationalCredential',
         credentialCategory: 'certification',
@@ -60,10 +54,10 @@ const structuredData = {
 ---
 
 <Layout
-  title="Bunu Tech | Building & Civil Engineering Contractors in Nigeria"
-  description="Bunu Tech is a leading building and civil engineering contractor in Nigeria, delivering construction, facility management and curtain walling services since 1932."
+  title="Bunutech Construction | Building & Civil Engineering Contractors in Nigeria"
+  description={site.description}
   image={ogImage}
-  imageAlt="Bunu Tech construction site with cranes in Nigeria"
+  imageAlt="Bunutech Construction site with cranes in Nigeria"
   preloadImage={{ href: heroImage, srcset: heroSrcSet, sizes: '100vw' }}
   jsonLd={structuredData}
 >
@@ -75,11 +69,11 @@ const structuredData = {
       <div class="px-6 py-14 sm:px-10 sm:py-16 lg:py-20 lg:pr-[7%] lg:pl-[8%] xl:pl-[10%]">
         <h2 id="about-heading" class="eyebrow">About Us</h2>
         <hr class="rule-brand" />
-        <p class="body-copy mt-6 text-justify">
-          Bunu Tech Ltd is a leading building and civil engineering contracting firm in Nigeria, with over 90
-          years of experience and a solid reputation built on its history, professionalism and commitment to
-          service excellence.
-        </p>
+        {
+          aboutCopy.map((paragraph, index) => (
+            <p class:list={['body-copy text-justify', index === 0 ? 'mt-6' : 'mt-4']}>{paragraph}</p>
+          ))
+        }
         <a href="/about" class="link-underline mt-8 text-lg">Learn more</a>
       </div>
 
@@ -88,7 +82,7 @@ const structuredData = {
           src={unsplash('1504307651254-35680f356dfd', 1200, 900, 65)}
           srcset={unsplashSet('1504307651254-35680f356dfd', [640, 900, 1200, 1600], 4 / 3, 65)}
           sizes="(min-width: 1024px) 50vw, 100vw"
-          alt="Bunu Tech engineers reviewing progress on a construction site"
+          alt="Bunutech Construction engineers reviewing progress on a construction site"
           width="1200"
           height="900"
           class="absolute inset-0 h-full w-full object-cover"
@@ -110,7 +104,7 @@ const structuredData = {
           src={unsplash('1516156008625-3a9d6067fab5', 1200, 1000, 65)}
           srcset={unsplashSet('1516156008625-3a9d6067fab5', [640, 900, 1200, 1600], 6 / 5, 65)}
           sizes="(min-width: 1024px) 50vw, 100vw"
-          alt="Bunu Tech specialists installing the structure of a commercial building"
+          alt="Bunutech Construction specialists installing the structure of a commercial building"
           width="1200"
           height="1000"
           class="absolute inset-0 h-full w-full object-cover"
@@ -123,10 +117,7 @@ const structuredData = {
       <div class="order-1 px-6 py-14 sm:px-10 sm:py-16 lg:order-2 lg:py-20 lg:pr-[8%] lg:pl-[7%]">
         <h2 id="services-heading" class="eyebrow">Our Services</h2>
         <hr class="rule-brand" />
-        <p class="body-copy mt-6 text-justify">
-          Bunu Tech offers to all clients, commercial and private, a broad range of multidisciplinary contracted
-          services to ensure seamless operation of their new or existing facilities.
-        </p>
+        <p class="body-copy mt-6 text-justify">{servicesIntro}</p>
 
         <ul class="mt-8 space-y-1">
           {
@@ -134,16 +125,13 @@ const structuredData = {
               <li>
                 <a
                   href={`/contact?subject=${encodeURIComponent(service.subject)}`}
-                  class="group flex items-start justify-between gap-5 border-b border-line py-4"
+                  class="group flex items-center justify-between gap-5 border-b border-line py-4"
                 >
-                  <span>
-                    <span class="block text-lg font-bold text-ink transition-colors group-hover:text-brand">
-                      {service.title}
-                    </span>
-                    <span class="mt-1 block text-sm leading-6 text-muted">{service.description}</span>
+                  <span class="text-lg font-bold text-ink transition-colors group-hover:text-brand">
+                    {service.title}
                   </span>
                   <svg
-                    class="mt-1 shrink-0 text-brand transition-transform duration-200 group-hover:translate-x-1"
+                    class="shrink-0 text-brand transition-transform duration-200 group-hover:translate-x-1"
                     width="20"
                     height="20"
                     viewBox="0 0 24 24"
@@ -159,6 +147,8 @@ const structuredData = {
             ))
           }
         </ul>
+
+        <p class="body-copy mt-8 text-justify">{servicesOutro}</p>
       </div>
     </div>
   </section>
@@ -221,11 +211,10 @@ const structuredData = {
     <div class="absolute inset-0 -z-10 bg-ink/75"></div>
 
     <div class="wrap">
-      <h2 id="cta-heading" class="sr-only">Work with Bunu Tech</h2>
+      <h2 id="cta-heading" class="sr-only">Work with Bunutech Construction</h2>
       <p class="max-w-5xl text-lg leading-8 text-justify text-white sm:text-xl sm:leading-9 lg:text-[25px] lg:leading-[30px]">
-        Whether it be a project of small or large scale, private or commercial, we have the resources and the
-        knowledge to deliver services of unmatched standard and quality. This is why we still remain at the
-        forefront in our field, after nearly a century of successful activity.
+        Whether it be a project of small or large scale, private or commercial, we bring technical expertise and
+        hands-on site experience to deliver quality from the design stage through to completion.
       </p>
       <div class="mt-8 text-center">
         <a href="/contact" class="btn-primary">Contact Us</a>
