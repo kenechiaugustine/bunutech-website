@@ -60,66 +60,8 @@ export const nav = [
       { label: 'Exterior Finishing', href: '/#services' },
     ],
   },
-  { label: 'Projects', href: '/#projects' },
+  { label: 'Projects', href: '/projects' },
   { label: 'Contact', href: '/contact' },
-];
-
-export type Project = {
-  name: string;
-  location: string;
-  image: string;
-  alt: string;
-};
-
-export const projects: Project[] = [
-  {
-    name: 'Afreximbank African Medical Centre of Excellence (AMCE)',
-    location: 'Abuja',
-    image: '1621905251189-08b45d6a269e',
-    alt: 'Modern medical centre construction with a glass and concrete facade',
-  },
-  {
-    name: 'Afrexim Bank Africa Trade Centre Abuja (AATC)',
-    location: 'Abuja',
-    image: '1486406146926-c627a92ad1ab',
-    alt: 'Contemporary high-rise office tower against a clear sky',
-  },
-  {
-    name: 'National Art Theatre',
-    location: 'Iganmu, Lagos',
-    image: '1511818966892-d7d671e672a2',
-    alt: 'Landmark cultural building with a sculptural roof',
-  },
-  {
-    name: 'The Civic Centre',
-    location: 'Victoria Island, Lagos',
-    image: '1487958449943-2429e8be8625',
-    alt: 'Civic building with clean horizontal architectural lines',
-  },
-  {
-    name: 'Dover Engineering Towers',
-    location: 'Victoria Island, Lagos',
-    image: '1448630360428-65456885c650',
-    alt: 'Corporate engineering towers viewed from street level',
-  },
-  {
-    name: 'The Citadel Global Community Church',
-    location: 'Oregun, Lagos',
-    image: '1494526585095-c41746248156',
-    alt: 'Large modern church auditorium exterior',
-  },
-  {
-    name: 'Wings Office Complex',
-    location: 'Victoria Island, Lagos',
-    image: '1481253127861-534498168948',
-    alt: 'Office complex with glazed curtain walling',
-  },
-  {
-    name: 'The Seattle Residencies and Spa',
-    location: 'Victoria Island, Lagos',
-    image: '1600585154340-be6161a56a0c',
-    alt: 'Premium residential development with landscaped entrance',
-  },
 ];
 
 export const services = [

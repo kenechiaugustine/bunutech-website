@@ -3,7 +3,12 @@
  * Widths are requested from the Unsplash CDN so browsers only download
  * the resolution they actually need.
  */
+/** True when the value is a local path or full URL rather than an Unsplash photo ID. */
+export const isDirectImage = (id: string) => id.startsWith('/') || /^https?:\/\//.test(id);
+
 export function unsplash(id: string, width = 1200, height?: number, quality = 70): string {
+  if (isDirectImage(id)) return id;
+
   const params = new URLSearchParams({
     auto: 'format',
     fit: 'crop',
@@ -25,7 +30,9 @@ export function unsplashSet(
   widths: number[] = [480, 768, 1024, 1440, 1920],
   aspect = 16 / 9,
   quality = 70,
-): string {
+): string | undefined {
+  if (isDirectImage(id)) return undefined;
+
   return widths
     .map((width) => `${unsplash(id, width, Math.round(width / aspect), quality)} ${width}w`)
     .join(', ');

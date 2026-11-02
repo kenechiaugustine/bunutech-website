@@ -7,9 +7,11 @@ interface Props {
   image: string;
   imageAlt: string;
   priority?: boolean;
+  crumbs?: { label: string; href: string }[];
+  eyebrow?: string;
 }
 
-const { title, description, image, imageAlt, priority = true } = Astro.props;
+const { title, description, image, imageAlt, priority = true, crumbs = [], eyebrow } = Astro.props;
 ---
 
 <section class="relative isolate flex min-h-[260px] items-center overflow-hidden bg-ink py-14 sm:min-h-[330px] sm:py-20 lg:min-h-[400px]">
@@ -32,9 +34,22 @@ const { title, description, image, imageAlt, priority = true } = Astro.props;
       <ol class="flex flex-wrap items-center gap-2">
         <li><a href="/" class="transition-colors hover:text-white">Home</a></li>
         <li aria-hidden="true">/</li>
+        {
+          crumbs.map((crumb) => (
+            <>
+              <li>
+                <a href={crumb.href} class="transition-colors hover:text-white">
+                  {crumb.label}
+                </a>
+              </li>
+              <li aria-hidden="true">/</li>
+            </>
+          ))
+        }
         <li aria-current="page" class="text-white">{title}</li>
       </ol>
     </nav>
+    {eyebrow && <p class="mb-3 text-xs font-bold tracking-[0.16em] text-white/80 uppercase sm:text-sm">{eyebrow}</p>}
     <h1 class="font-display text-3xl tracking-[0.04em] text-white uppercase sm:text-4xl lg:text-5xl">
       {title}
     </h1>

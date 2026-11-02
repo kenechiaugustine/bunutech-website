@@ -2,7 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CornerMarks from '../components/CornerMarks.astro';
-import { site, aboutCopy, projects, services, servicesIntro, servicesOutro } from '../data/site';
+import ProjectCard from '../components/ProjectCard.astro';
+import { site, aboutCopy, services, servicesIntro, servicesOutro } from '../data/site';
+import { featuredProjects } from '../data/projects';
 import { unsplash, unsplashSet } from '../lib/images';
 
 const ogImage = unsplash('1541888946425-d81bb19240f5', 1200, 630, 65);
@@ -163,33 +165,18 @@ const structuredData = {
         <p class="text-[11px] tracking-[0.14em] text-muted uppercase">Selected work across Nigeria</p>
       </div>
 
-      <div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <ul class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
-          projects.map((project) => (
-            <article class="group relative overflow-hidden bg-ink">
-              <img
-                src={unsplash(project.image, 700, 525, 62)}
-                srcset={unsplashSet(project.image, [400, 600, 800, 1000], 4 / 3, 62)}
-                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                alt={project.alt}
-                width="800"
-                height="600"
-                class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-                decoding="async"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/25 to-transparent"></div>
-              <div class="absolute inset-x-0 bottom-0 p-4">
-                <h3 class="text-[13px] leading-snug font-bold text-white uppercase">{project.name}</h3>
-                <p class="mt-1.5 text-[10px] tracking-[0.14em] text-white/75 uppercase">{project.location}</p>
-              </div>
-            </article>
+          featuredProjects(3).map((project) => (
+            <li>
+              <ProjectCard project={project} />
+            </li>
           ))
         }
-      </div>
+      </ul>
 
       <div class="mt-9 text-center">
-        <a href="/contact?subject=Project%20enquiry" class="btn-primary">View All Projects</a>
+        <a href="/projects" class="btn-primary">View All Projects</a>
       </div>
     </div>
   </section>
