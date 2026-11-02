@@ -38,28 +38,8 @@ export const servicesOutro =
 
 export const nav = [
   { label: 'Home', href: '/' },
-  {
-    label: 'About Us',
-    href: '/about',
-    children: [
-      { label: 'Company', href: '/about#company' },
-      { label: 'Our Team', href: '/about#team' },
-      { label: 'Company History', href: '/about#history' },
-    ],
-  },
-  {
-    label: 'Services',
-    href: '/#services',
-    children: [
-      { label: 'Architectural Drawings', href: '/#services' },
-      { label: 'Mechanical Drawings', href: '/#services' },
-      { label: 'Electrical Drawings', href: '/#services' },
-      { label: 'Building Construction', href: '/#services' },
-      { label: 'Landscaping', href: '/#services' },
-      { label: 'Interior Finishing', href: '/#services' },
-      { label: 'Exterior Finishing', href: '/#services' },
-    ],
-  },
+  { label: 'About Us', href: '/about' },
+  { label: 'Services', href: '/#services' },
   { label: 'Projects', href: '/projects' },
   { label: 'Contact', href: '/contact' },
 ];
