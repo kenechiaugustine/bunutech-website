@@ -33,7 +33,7 @@ const structuredData = {
       '@id': `${site.url}/#organization`,
       name: site.legalName,
       url: site.url,
-      telephone: site.phone,
+      telephone: site.phoneHref,
       email: site.email,
       address: {
         '@type': 'PostalAddress',
@@ -46,7 +46,7 @@ const structuredData = {
       openingHours: 'Mo-Fr 08:00-17:00',
       contactPoint: {
         '@type': 'ContactPoint',
-        telephone: site.phone,
+        telephone: site.phoneHref,
         email: site.email,
         contactType: 'sales',
         areaServed: 'NG',
@@ -95,7 +95,7 @@ const icons: Record<string, string[]> = {
 
 <Layout
   title="Contact Us | Bunu Tech — Let’s Build Together"
-  description="Contact Bunu Tech in Lagos for construction, facility management and aluminium and curtain walling enquiries. Call +234 (0)902 322 0000 or send us a message."
+  description="Contact Bunu Tech in Lagos for construction, facility management and aluminium and curtain walling enquiries. Call 08147263685 or send us a message."
   image={ogImage}
   imageAlt="Bunu Tech office in Lagos, Nigeria"
   jsonLd={structuredData}

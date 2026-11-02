@@ -6,16 +6,19 @@ const slides = [
     image: '1541888946425-d81bb19240f5',
     alt: 'Construction site with tower cranes and a rising concrete structure',
     lines: ['Builders To The Nation', 'Since 1932'],
+    body: 'For more than 90 years we have shaped Nigeria’s skyline, delivering landmark buildings and civil works with quality and integrity.',
   },
   {
     image: '1486406146926-c627a92ad1ab',
     alt: 'Modern high-rise building with a glass facade',
     lines: ['Legacy built on Quality,', 'Excellence & Innovation'],
+    body: 'From concept to handover, we combine proven expertise, modern technology and disciplined delivery on every project.',
   },
   {
     image: '1503387762-592deb58ef4e',
     alt: 'Completed contemporary building designed and built by Bunu Tech',
     lines: ['Building and Civil Engineering Contractors'],
+    body: 'Trusted by commercial, industrial and private clients nationwide for construction, facility management and curtain walling.',
   },
 ];
 
@@ -24,7 +27,7 @@ const widths = [640, 1024, 1440, 1920];
 ---
 
 <section
-  class="relative isolate h-[300px] overflow-hidden bg-ink sm:h-[430px] lg:h-[550px]"
+  class="relative isolate h-[470px] overflow-hidden bg-ink lg:h-[550px]"
   role="region"
   aria-roledescription="carousel"
   aria-label="Bunu Tech highlights"
@@ -59,8 +62,8 @@ const widths = [640, 1024, 1440, 1920];
         <div class="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/55 to-ink/15"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent"></div>
 
-        <div class="wrap relative flex h-full items-center">
-          <div class="max-w-3xl pt-2 sm:pt-0">
+        <div class="wrap absolute inset-0 flex items-center">
+          <div class="max-w-4xl pt-2 sm:px-12 sm:pt-0 xl:px-0">
             {index === 0 ? (
               <h1 class="font-display text-[25px] leading-[1.18] tracking-[0.02em] text-white uppercase sm:text-[38px] lg:text-[52px] xl:text-[60px]">
                 {slide.lines.map((line) => <span class="block">{line}{' '}</span>)}
@@ -71,7 +74,11 @@ const widths = [640, 1024, 1440, 1920];
               </h2>
             )}
 
-            <div class="mt-6 flex flex-col gap-3 xs:flex-row sm:mt-10 sm:gap-4">
+            <p class="mt-4 max-w-2xl text-[15px] leading-6 text-white/85 sm:mt-5 sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
+              {slide.body}
+            </p>
+
+            <div class="mt-6 flex flex-col gap-3 xs:flex-row sm:mt-8 sm:gap-4">
               <a href="/contact" class="btn-primary w-full xs:w-auto">Contact Us</a>
               <a href="#services" class="btn-outline-light w-full xs:w-auto">View Our Services</a>
             </div>
@@ -121,7 +128,7 @@ const widths = [640, 1024, 1440, 1920];
 
   <button
     type="button"
-    class="absolute right-4 bottom-4 z-20 grid h-10 w-10 place-items-center border border-white/40 bg-ink/30 text-white transition-colors hover:bg-brand"
+    class="absolute top-3 right-3 z-20 grid h-10 w-10 place-items-center border border-white/40 bg-ink/30 text-white transition-colors hover:bg-brand sm:top-auto sm:right-4 sm:bottom-4"
     aria-label="Pause slideshow"
     aria-pressed="false"
     data-carousel-toggle

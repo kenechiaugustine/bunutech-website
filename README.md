@@ -85,7 +85,7 @@ The company profile is modelled on the reference site, so some details are place
 replaced with Bunu Tech's real information before launch:
 
 - RC number in the footer (`src/components/Footer.astro`)
-- Phone number, email and head-office address (`src/data/site.ts`)
+- Head-office address (`src/data/site.ts`)
 - LinkedIn and Instagram URLs (`src/data/site.ts`)
 - Board member names and portraits (`src/data/site.ts` / `src/pages/about.astro`)
 

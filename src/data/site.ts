@@ -1,13 +1,13 @@
 export const site = {
   name: 'Bunu Tech',
   legalName: 'Bunu Tech Ltd',
-  url: 'https://www.bunutech.com',
+  url: 'https://www.bunutechconstructions.com',
   tagline: 'Building and civil engineering contractors',
   description:
     'Bunu Tech is a leading building and civil engineering contracting firm in Nigeria, delivering construction, facility management and aluminium and curtain walling services since 1932.',
-  phone: '+234 (0)902 322 0000',
-  phoneHref: '+2349023220000',
-  email: 'hello@bunutech.com',
+  phone: '08147263685',
+  phoneHref: '+2348147263685',
+  email: 'support@bunutechconstructions.com',
   address: {
     street: '72 Campbell Street',
     locality: 'Lagos Island',
@@ -128,7 +128,7 @@ export const services = [
 ];
 
 export const board = [
-  { name: 'Ibrahim Bunu', role: 'Chairman' },
+  { name: 'Musa Yusuf', role: 'Chairman / CEO' },
   { name: 'Amina Bello', role: 'Vice Chairman' },
   { name: 'Marco Bellini', role: 'Managing Director' },
   { name: 'Engr. Adetokunbo Coker', role: 'Non-Executive Director' },
