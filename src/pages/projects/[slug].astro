@@ -5,7 +5,6 @@ import PageHero from '../../components/PageHero.astro';
 import CornerMarks from '../../components/CornerMarks.astro';
 import { site } from '../../data/site';
 import { projects, projectUrl, type Project } from '../../data/projects';
-import { unsplash, unsplashSet } from '../../lib/images';
 
 export const getStaticPaths = (() =>
   projects.map((project, index) => ({
@@ -25,7 +24,7 @@ interface Props {
 
 const { project, prev, next } = Astro.props;
 const url = `${site.url}${projectUrl(project)}`;
-const ogImage = unsplash(project.image, 1200, 630, 65);
+const ogImage = project.image;
 const pad = (n: number) => String(n).padStart(2, '0');
 const stepId = (index: number) => `step-${index + 1}`;
 
@@ -167,17 +166,99 @@ const structuredData = {
             return (
               <li id={stepId(index)} class="scroll-mt-28 grid items-center gap-6 bg-white shadow-card lg:grid-cols-12 lg:gap-0">
                 <figure class:list={['relative lg:col-span-7', reversed && 'lg:order-2']}>
-                  <img
-                    src={unsplash(step.image, 1200, 800, 65)}
-                    srcset={unsplashSet(step.image, [480, 768, 1024, 1440], 3 / 2, 65)}
-                    sizes="(min-width: 1024px) 58vw, 100vw"
-                    alt={step.alt}
-                    width="1200"
-                    height="800"
-                    class="aspect-[3/2] w-full object-cover"
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                    decoding="async"
-                  />
+                  {
+                    step.images.length > 1 ? (
+                      <div
+                        class="relative aspect-[3/2] w-full overflow-hidden bg-ink"
+                        role="group"
+                        aria-roledescription="carousel"
+                        aria-label={`${step.title} images`}
+                        data-gallery
+                      >
+                        <div class="flex h-full transition-transform duration-500 ease-out" data-gallery-track>
+                          {step.images.map((src, imageIndex) => (
+                            <div
+                              class="h-full w-full shrink-0"
+                              role="group"
+                              aria-roledescription="slide"
+                              aria-label={`${imageIndex + 1} of ${step.images.length}`}
+                              aria-hidden={imageIndex === 0 ? 'false' : 'true'}
+                              inert={imageIndex !== 0}
+                              data-gallery-slide
+                            >
+                              <img
+                                src={src}
+                                alt={
+                                  imageIndex === 0
+                                    ? step.alt
+                                    : `${step.alt} — image ${imageIndex + 1} of ${step.images.length}`
+                                }
+                                width="1200"
+                                height="800"
+                                class="h-full w-full object-cover"
+                                loading={index === 0 && imageIndex === 0 ? 'eager' : 'lazy'}
+                                decoding="async"
+                              />
+                            </div>
+                          ))}
+                        </div>
+
+                        <button
+                          type="button"
+                          class="absolute top-1/2 left-2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center border border-white/40 bg-ink/40 text-white transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                          aria-label="Previous image"
+                          data-gallery-prev
+                        >
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            aria-hidden="true"
+                          >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6" />
+                          </svg>
+                        </button>
+                        <button
+                          type="button"
+                          class="absolute top-1/2 right-2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center border border-white/40 bg-ink/40 text-white transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                          aria-label="Next image"
+                          data-gallery-next
+                        >
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            aria-hidden="true"
+                          >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6" />
+                          </svg>
+                        </button>
+                        <p
+                          class="absolute right-3 bottom-3 border border-white/40 bg-ink/50 px-2.5 py-1 text-[11px] tracking-[0.1em] text-white"
+                          aria-live="polite"
+                          data-gallery-counter
+                        >
+                          1 / {step.images.length}
+                        </p>
+                      </div>
+                    ) : (
+                      <img
+                        src={step.images[0]}
+                        alt={step.alt}
+                        width="1200"
+                        height="800"
+                        class="aspect-[3/2] w-full object-cover"
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        decoding="async"
+                      />
+                    )
+                  }
                   <CornerMarks />
                   <figcaption class="sr-only">{step.alt}</figcaption>
                 </figure>
@@ -222,3 +303,36 @@ const structuredData = {
     </div>
   </nav>
 </Layout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
+    const track = gallery.querySelector<HTMLElement>('[data-gallery-track]');
+    const slides = Array.from(gallery.querySelectorAll<HTMLElement>('[data-gallery-slide]'));
+    const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]');
+    if (!track || slides.length < 2) return;
+
+    let index = 0;
+
+    const show = (next: number) => {
+      index = (next + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+
+      slides.forEach((slide, i) => {
+        const active = i === index;
+        slide.setAttribute('aria-hidden', String(!active));
+        if (active) slide.removeAttribute('inert');
+        else slide.setAttribute('inert', '');
+      });
+
+      if (counter) counter.textContent = `${index + 1} / ${slides.length}`;
+    };
+
+    gallery.querySelector('[data-gallery-prev]')?.addEventListener('click', () => show(index - 1));
+    gallery.querySelector('[data-gallery-next]')?.addEventListener('click', () => show(index + 1));
+
+    gallery.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
+    });
+  });
+</script>

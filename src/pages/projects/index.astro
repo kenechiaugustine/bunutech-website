@@ -4,10 +4,11 @@ import PageHero from '../../components/PageHero.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { site } from '../../data/site';
 import { projects, projectUrl } from '../../data/projects';
-import { unsplash } from '../../lib/images';
 
-const heroImage = '1541888946425-d81bb19240f5';
-const ogImage = unsplash(heroImage, 1200, 630, 65);
+const heroImage =
+  'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1600&h=700&q=60';
+const ogImage =
+  'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&h=630&q=65';
 
 const structuredData = {
   '@context': 'https://schema.org',

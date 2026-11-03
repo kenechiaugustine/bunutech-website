@@ -45,7 +45,6 @@ src/
 │   └── PageHero.astro      # inner-page banner + breadcrumb
 ├── data/site.ts            # site details, navigation, projects, people, copy
 ├── layouts/Layout.astro    # document head, SEO meta, JSON-LD, header/footer
-├── lib/images.ts           # Unsplash URL + srcset helpers
 ├── pages/
 │   ├── index.astro
 │   ├── about.astro
@@ -72,8 +71,8 @@ src/
 
 ## Images and performance
 
-- Unsplash images are requested at the exact width needed with `srcset`/`sizes`, so phones do not
-  download desktop-sized files.
+- Full image URLs are stored directly in the data files and components, requested at the width each
+  layout needs.
 - The hero image is preloaded; every other image is lazy-loaded and decodes asynchronously.
 - Explicit dimensions / aspect ratios avoid layout shift.
 - Fonts are self-hosted WOFF2 files and limited to the weights in use.

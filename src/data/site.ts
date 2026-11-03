@@ -57,6 +57,7 @@ export const services = [
 export type TeamMember = {
   name: string;
   role: string;
+  image: string;
   bio?: string;
 };
 
@@ -64,15 +65,18 @@ export const team: TeamMember[] = [
   {
     name: 'Arc. Yusuf Musa',
     role: 'Founder & CEO',
+    image: 'https://placehold.co/480x560/e5e5e5/666?text=Arc.%20Yusuf%20Musa&font=lato',
     bio: 'Often referred to online as Comr. Musa Yusuf, he is an architect and a realtor, and is noted as a president emeritus of an architecture department. He leads Bunutech Construction, a real estate and construction firm operating in all parts of Nigeria. His work emphasizes designing functional structures, sketching modern properties, and offering real estate investments across Nigeria and wider Africa.',
   },
   {
     name: 'Ibrahim Ahmed',
     role: 'Engineer',
+    image: 'https://placehold.co/480x560/e5e5e5/666?text=Ibrahim%20Ahmed&font=lato',
   },
   {
     name: 'Kenechukwu Arionye',
     role: 'Chief Technical Officer',
+    image: 'https://placehold.co/480x560/e5e5e5/666?text=Kenechukwu%20Arionye&font=lato',
   },
 ];
 

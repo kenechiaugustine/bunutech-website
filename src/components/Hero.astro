@@ -1,29 +1,24 @@
 ---
-import { unsplash, unsplashSet } from '../lib/images';
-
 const slides = [
   {
-    image: '1541888946425-d81bb19240f5',
+    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1920&h=1080&q=65',
     alt: 'Construction site with tower cranes and a rising concrete structure',
     lines: ['Builders To The Nation', 'Since 2016'],
     body: 'Founded in 2016, we bring technical expertise and hands-on construction knowledge to quality building and civil engineering projects across Nigeria.',
   },
   {
-    image: '1486406146926-c627a92ad1ab',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&h=1080&q=65',
     alt: 'Modern high-rise building with a glass facade',
     lines: ['Legacy built on Quality,', 'Excellence & Innovation'],
     body: 'From concept to handover, we combine proven expertise, modern technology and disciplined delivery on every project.',
   },
   {
-    image: '1503387762-592deb58ef4e',
+    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1920&h=1080&q=65',
     alt: 'Completed contemporary building designed and built by Bunutech Construction',
     lines: ['Building and Civil Engineering Contractors'],
     body: 'Trusted nationwide for architectural, mechanical and electrical drawings, building construction, landscaping and finishing.',
   },
 ];
-
-const sizes = '100vw';
-const widths = [640, 1024, 1440, 1920];
 ---
 
 <section
@@ -48,9 +43,7 @@ const widths = [640, 1024, 1440, 1920];
         inert={index !== 0}
       >
         <img
-          src={unsplash(slide.image, 1440, 810, 65)}
-          srcset={unsplashSet(slide.image, widths, 16 / 9, 65)}
-          sizes={sizes}
+          src={slide.image}
           alt={slide.alt}
           width="1920"
           height="900"

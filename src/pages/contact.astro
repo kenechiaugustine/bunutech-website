@@ -2,9 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import { site, services } from '../data/site';
-import { unsplash } from '../lib/images';
 
-const ogImage = unsplash('1497366216548-37526070297c', 1200, 630, 65);
+const heroImage =
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&h=700&q=60';
+const ogImage =
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&h=630&q=65';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -102,7 +104,7 @@ const icons: Record<string, string[]> = {
   <PageHero
     title="Contact Us"
     description="Talk to our team about drawings, building construction, landscaping or finishing."
-    image="1497366216548-37526070297c"
+    image={heroImage}
     imageAlt="Bunutech Construction team in a modern office in Lagos"
   />
 

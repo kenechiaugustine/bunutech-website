@@ -5,11 +5,11 @@ import CornerMarks from '../components/CornerMarks.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { site, aboutCopy, services, servicesIntro, servicesOutro } from '../data/site';
 import { featuredProjects } from '../data/projects';
-import { unsplash, unsplashSet } from '../lib/images';
 
-const ogImage = unsplash('1541888946425-d81bb19240f5', 1200, 630, 65);
-const heroImage = unsplash('1541888946425-d81bb19240f5', 1440, 810, 65);
-const heroSrcSet = unsplashSet('1541888946425-d81bb19240f5', [640, 1024, 1440, 1920], 16 / 9, 65);
+const ogImage =
+  'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&h=630&q=65';
+const heroImage =
+  'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1920&h=1080&q=65';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -60,7 +60,7 @@ const structuredData = {
   description={site.description}
   image={ogImage}
   imageAlt="Bunutech Construction site with cranes in Nigeria"
-  preloadImage={{ href: heroImage, srcset: heroSrcSet, sizes: '100vw' }}
+  preloadImage={{ href: heroImage }}
   jsonLd={structuredData}
 >
   <Hero />
@@ -81,9 +81,7 @@ const structuredData = {
 
       <div class="relative min-h-[300px] sm:min-h-[420px] lg:min-h-[520px]">
         <img
-          src={unsplash('1504307651254-35680f356dfd', 1200, 900, 65)}
-          srcset={unsplashSet('1504307651254-35680f356dfd', [640, 900, 1200, 1600], 4 / 3, 65)}
-          sizes="(min-width: 1024px) 50vw, 100vw"
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&h=900&q=65"
           alt="Bunutech Construction engineers reviewing progress on a construction site"
           width="1200"
           height="900"
@@ -103,9 +101,7 @@ const structuredData = {
     <div class="grid lg:grid-cols-2">
       <div class="relative order-2 min-h-[300px] sm:min-h-[420px] lg:order-1 lg:min-h-[560px]">
         <img
-          src={unsplash('1516156008625-3a9d6067fab5', 1200, 1000, 65)}
-          srcset={unsplashSet('1516156008625-3a9d6067fab5', [640, 900, 1200, 1600], 6 / 5, 65)}
-          sizes="(min-width: 1024px) 50vw, 100vw"
+          src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?auto=format&fit=crop&w=1200&h=1000&q=65"
           alt="Bunutech Construction specialists installing the structure of a commercial building"
           width="1200"
           height="1000"
@@ -184,9 +180,7 @@ const structuredData = {
   <!-- Contact call to action -->
   <section class="relative isolate overflow-hidden bg-ink py-16 sm:py-20 lg:py-24" aria-labelledby="cta-heading">
     <img
-      src={unsplash('1531834685032-c34bf0d84c77', 1600, 900, 55)}
-      srcset={unsplashSet('1531834685032-c34bf0d84c77', [768, 1200, 1600, 1920], 16 / 9, 55)}
-      sizes="100vw"
+      src="https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?auto=format&fit=crop&w=1600&h=900&q=55"
       alt=""
       aria-hidden="true"
       width="1600"
