@@ -179,18 +179,11 @@ const icons: Record<string, string[]> = {
             Fields marked with <span class="text-brand">*</span> are required.
           </p>
 
-          <!--
-            Front-end demo form: validates and shows a success state, but does not send email.
-            Connect it to Formspree, Netlify Forms, Resend or your own API before launch by
-            replacing the action/method below and removing preventDefault() in the script.
-          -->
           <form
             class="mt-7 grid gap-5 sm:grid-cols-2"
-            action={`mailto:${site.email}`}
-            method="post"
-            enctype="text/plain"
             novalidate
             data-contact-form
+            data-recipient={site.email}
           >
             <div>
               <label class="field-label" for="name">Full name <span class="text-brand">*</span></label>
@@ -319,14 +312,36 @@ const icons: Record<string, string[]> = {
       return;
     }
 
+    const value = (name: string) => {
+      const field = new FormData(form).get(name);
+      return typeof field === 'string' ? field.trim() : '';
+    };
+
+    const name = value('name');
+    const email = value('email');
+    const phone = value('phone');
+    const service = value('service');
+    const message = value('message');
+    const recipient = form.dataset.recipient ?? '';
+
+    const subject = service ? `Enquiry: ${service}` : `Enquiry from ${name}`;
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Phone: ${phone || 'Not provided'}`,
+      `Service: ${service || 'Not specified'}`,
+      '',
+      message,
+    ].join('\r\n');
+
+    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+
     if (status) {
       status.hidden = false;
       status.classList.remove('hidden');
-      status.textContent =
-        'Thank you for your message. Our team will review your enquiry and respond within one business day.';
+      status.textContent = `Your email app should open with this enquiry addressed to ${recipient}. Review the message and press send.`;
       status.focus({ preventScroll: false });
     }
-
-    form.reset();
   });
 </script>
